@@ -32,7 +32,7 @@ public class Cryptography {
 
         while (true)
         {
-            System.out.println("Введите id - от 14776336(baaaa) до  916132832(baaaaa)");
+            System.out.println("Введите id - от 10000");
             Long id = scanner.nextLong();
             try {
                 String base62 = Base62.fromBase10(id);
