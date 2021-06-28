@@ -11,10 +11,10 @@ public class Cryptography {
 
         byte[] image1 = CruptoImage.getImage();
         byte[] image = new byte[32];
-        byte[] ii = new byte[8];
+        byte[] key = new byte[8];
         for (int i = 0; i < 8; i++)
         {
-            ii[i] = Byte.valueOf(String.valueOf(i));
+            key[i] = Byte.valueOf(String.valueOf(i));
         }
         for (int i = 0; i < 32; i++)
         {
@@ -23,7 +23,7 @@ public class Cryptography {
         FormatPreservingEncryption formatPreservingEncryption = FormatPreservingEncryptionBuilder
                 .ff1Implementation()
                 .withDomain(DomainBuilder.DOMAIN)
-                .withPseudoRandomFunction(new DefaultPseudoRandomFunction(image))
+                .withPseudoRandomFunction(new DefaultPseudoRandomFunction(image))//задаю псевдо рандом картинкой кота)
                 .withLengthRange(new LengthRange(2, 256))
                 .build();
 
@@ -32,22 +32,21 @@ public class Cryptography {
 
         while (true)
         {
-            Long line = scanner.nextLong();
+            System.out.println("Введите id - от 14776336(baaaa) до  916132832(baaaaa)");
+            Long id = scanner.nextLong();
             try {
-                System.out.println("Line input   : [" + line + "]");
-                String base62 = Base62.encode(line);
-                System.out.println("Line 62 encod: [" + base62 + "]");
-                String cipherText = formatPreservingEncryption.encrypt(base62, ii);
-                System.out.println("Line cryptFPE: [" + cipherText + "]");
-                String plainText = formatPreservingEncryption.decrypt(cipherText, ii);
-                System.out.println("Line decrypt : [" + plainText + "]");
-                Long base62decode = Base62.decode(plainText);
-                System.out.println("Line decryp62: [" + base62decode + "]");
+                String base62 = Base62.fromBase10(id);
+                System.out.println("Line cryp62   : [" + base62 + "]");
+                String cipherText = formatPreservingEncryption.encrypt(base62, key);
+                System.out.println("Line cryptFPE : [" + cipherText + "]");
+                String plainText = formatPreservingEncryption.decrypt(cipherText, key);
+                System.out.println("Line decrypt  : [" + plainText + "]");
+                Long input = Base62.toBase10(plainText);
+                System.out.println("Test decrypt62: [" + input + "]");
 
             } catch (Exception e) {
                 System.err.println("=(");
             }
-
         }
     }
 }
