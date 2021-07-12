@@ -4,7 +4,7 @@ import java.util.TreeSet;
 public class Base62 {
 
     public static final String ALPHABET = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    private TreeMap<Character, Integer> ALPHABETTREE = new TreeMap<Character, Integer>();
+    private TreeMap<Character, Integer> ALPHABETTREE = new TreeMap<>();
 
     public static final int BASE = ALPHABET.length();
 
@@ -31,13 +31,16 @@ public class Base62 {
     }
 
     public long toBase10(String str) {
-        return toBase10(new StringBuilder(str).reverse().toString().toCharArray());
+        return toBase10(str.toCharArray());
     }
+
+
 
     private long toBase10(char[] chars) {
         long n = 0;
-        for (int i = chars.length - 1; i >= 0; i--) {
-            n += toBase10(ALPHABETTREE.get(chars[i]), i);
+        int len = chars.length - 1;
+        for (int i = len; i >= 0; i--) {
+            n += toBase10(ALPHABETTREE.get(chars[i]), len - i);
         }
         return n;
     }
