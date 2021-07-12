@@ -30,23 +30,23 @@ public class Cryptography {
         System.out.println(image.length);
         Scanner scanner = new Scanner(System.in);
 
-        while (true)
-        {
-            System.out.println("Введите id - от 10000");
-            Long id = scanner.nextLong();
-            try {
-                String base62 = Base62.fromBase10(id);
-                System.out.println("Line cryp62   : [" + base62 + "]");
-                String cipherText = formatPreservingEncryption.encrypt(base62, key);
-                System.out.println("Line cryptFPE : [" + cipherText + "]");
-                String plainText = formatPreservingEncryption.decrypt(cipherText, key);
-                System.out.println("Line decrypt  : [" + plainText + "]");
-                Long input = Base62.toBase10(plainText);
-                System.out.println("Test decrypt62: [" + input + "]");
-
-            } catch (Exception e) {
-                System.err.println("=(");
-            }
-        }
+//        while (true)
+//        {
+//            System.out.println("Введите id - от 10000");
+//            Long id = scanner.nextLong();
+//            try {
+//                String base62 = Base62.fromBase10(id);
+//                System.out.println("Line cryp62   : [" + base62 + "]");
+//                String cipherText = formatPreservingEncryption.encrypt(base62, key);
+//                System.out.println("Line cryptFPE : [" + cipherText + "]");
+//                String plainText = formatPreservingEncryption.decrypt(cipherText, key);
+//                System.out.println("Line decrypt  : [" + plainText + "]");
+//                Long input = Base62.toBase10(plainText);
+//                System.out.println("Test decrypt62: [" + input + "]");
+//
+//            } catch (Exception e) {
+//                System.err.println("=(");
+//            }
+//        }
     }
 }
