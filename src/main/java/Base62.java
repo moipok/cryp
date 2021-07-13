@@ -31,16 +31,20 @@ public class Base62 {
     }
 
     public long toBase10(String str) {
-        return toBase10(str.toCharArray());
+        return toBase10(new StringBuilder(str).reverse().toString().toCharArray());
     }
 
 
 
     private long toBase10(char[] chars) {
         long n = 0;
-        int len = chars.length - 1;
-        for (int i = len; i >= 0; i--) {
-            n += toBase10(ALPHABETTREE.get(chars[i]), len - i);
+        for (int i = chars.length -1; i >= 0; --i) {
+            if  (chars[i] >= 'a')
+                n += toBase10(chars[i] - 'a' + 10, i);
+            else if (chars[i] <= '9')
+            n += toBase10(chars[i] - '0', i);
+            else
+                n += toBase10(chars[i] - 'A' + 36, i);
         }
         return n;
     }
